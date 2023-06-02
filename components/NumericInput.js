@@ -23,10 +23,11 @@ const NumericInput = ({ min, max, value, onChange, unit = "", ...rest }) => {
         // skin="round"
         buttonStyle={styles.counter_button}
         step={1}
-        color="white"
+        color={colors.lighter}
+        textColor={colors.lighter}
         max={max}
         min={min}
-        fontSize={RFPercentage(2.3)}
+        fontSize={RFPercentage(2.5)}
         value={value}
         onChange={onChange}
         rest
@@ -50,11 +51,7 @@ const styles = StyleSheet.create({
   m_bottom: { marginBottom: 20 },
   numeric_container: { flexDirection: "row", alignItems: "flex-end" },
   counter_button: {
-    // shadowColor: "black",
-    // shadowRadius: 0,
-    // shadowOffset: { width: 0, height: 5 },
-    // shadowOpacity: 0.8,
-    backgroundColor: colors.dark,
+    backgroundColor: colors.light,
     opacity: 0.7,
   },
 });

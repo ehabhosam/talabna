@@ -1,7 +1,7 @@
 import React from "react";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
-import { View, Dimensions, StyleSheet, Text } from "react-native";
+import { View, useWindowDimensions, StyleSheet, Text } from "react-native";
 
 import InputField from "./InputField";
 import SimpleButton from "./SimpleButton";
@@ -16,6 +16,7 @@ export default function BottomButtons({
   userInput,
   onClearItems,
 }) {
+  const { width } = useWindowDimensions();
   return (
     <>
       {isViewingInputField && (
@@ -30,8 +31,7 @@ export default function BottomButtons({
           placeholder="اكتب اوردرك زي كدا: واحد فول و4 طعمية مثلا"
         />
       )}
-
-      <View style={[styles.buttons_container]}>
+      <View style={[styles.buttons_container, { width }]}>
         <SimpleButton
           backgroundColor={colors.tomato}
           onPress={onClearItems}
@@ -68,6 +68,8 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "flex-end",
+    bottom: 0,
+    position: "absolute",
   },
   main_button: {
     backgroundColor: colors.darker,

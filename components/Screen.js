@@ -11,7 +11,7 @@ import {
 
 import WrapperWithKeyboardDismiss from "./KeyboardAvoid";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 function Screen({ children, style, avoidKeyboard = true }) {
   return (
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     zIndex: 5,
     width,
+    height,
   },
   inner: {
     width: "100%",

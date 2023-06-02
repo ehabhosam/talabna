@@ -50,22 +50,24 @@ export default function MainScreen() {
         </AppText>
       </Animated.View>
 
-      {state.items.length === 0 && <EmptyItems />}
+      {state.items.length > 0 && (
+        <FlatList
+          style={styles.list}
+          data={state.items}
+          keyboardDismissMode={"interactive"}
+          renderItem={({ item }) => (
+            <ItemRow
+              backgroundColor={colors.light}
+              item={item}
+              dispatch={dispatch}
+              key={item.id}
+            />
+          )}
+          ItemSeparatorComponent={<View style={{ height: 10 }} />}
+        />
+      )}
 
-      <FlatList
-        style={styles.list}
-        data={state.items}
-        keyboardDismissMode={"interactive"}
-        renderItem={({ item }) => (
-          <ItemRow
-            backgroundColor={colors.light}
-            item={item}
-            dispatch={dispatch}
-            key={item.id}
-          />
-        )}
-        ItemSeparatorComponent={<View style={{ height: 10 }} />}
-      />
+      {state.items.length === 0 && <EmptyItems />}
 
       <BottomButtons
         dispatch={dispatch}
@@ -82,6 +84,7 @@ export default function MainScreen() {
 const styles = StyleSheet.create({
   list: {
     marginTop: 20,
+    overflow: "visible",
   },
   title_shadow: {
     position: "absolute",

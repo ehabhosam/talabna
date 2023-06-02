@@ -1,9 +1,8 @@
 import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import { Image } from "expo-image";
+import { StyleSheet, Dimensions } from "react-native";
 import Animated, {
   BounceIn,
-  BounceOut,
+  ZoomOutDown,
   useAnimatedStyle,
   withRepeat,
   withSequence,
@@ -35,8 +34,8 @@ export default function EmptyItems() {
   return (
     <Animated.View
       style={[styles.image_container, styles.drop_shadow]}
-      entering={BounceIn}
-      exiting={BounceOut}
+      entering={BounceIn.delay(200)}
+      exiting={ZoomOutDown}
     >
       <Animated.View>
         <Animated.Image

@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import NumericInput from "./../NumericInput";
+import { Image } from "expo-image";
 import {
   StyleSheet,
   TouchableWithoutFeedback,
@@ -19,10 +20,18 @@ import SwipeableItem, {
 } from "react-native-swipeable-item";
 
 import AppText from "./../AppText";
+import imgUrl from "../../assets/unzoomed.png";
 import { Item } from "../../module/Item";
 import RelativeView from "./../RelativeView";
 import { ThemedButton } from "react-native-really-awesome-button";
 import { colors } from "../../utils/colors";
+import Animated, {
+  SlideOutDown,
+  SlideOutRight,
+  ZoomInUp,
+  ZoomOutDown,
+  ZoomOutRight,
+} from "react-native-reanimated";
 
 const { width } = Dimensions.get("window");
 
@@ -63,20 +72,33 @@ const ItemRow = ({ item, backgroundColor, dispatch }) => {
   };
 
   return (
-    <View style={styles.shadow}>
-      <Swipeable renderLeftActions={deleteButton}>
+    <Animated.View
+      style={styles.drop_shadow}
+      entering={ZoomInUp}
+      exiting={SlideOutRight}
+    >
+      <Swipeable renderRightActions={deleteButton}>
         <TouchableWithoutFeedback>
           <RelativeView
             width={"100%"}
-            height="9vh"
+            height="10vh"
             style={[styles.test, { backgroundColor }]}
           >
+            <Image
+              blurRadius={0.5}
+              source={imgUrl}
+              style={styles.image}
+              contentFit="cover"
+            />
             <LinearGradient
-              // Background Linear Gradient
-              colors={[colors.lighter, colors.light]}
+              colors={[
+                "transparent",
+                "rgba(250, 233, 190, 0.65)",
+                colors.lighter,
+              ]}
               style={styles.background}
-              start={{ x: 0, y: 0.75 }}
-              end={{ x: 1, y: 0.25 }}
+              start={{ x: 0, y: 0.25 }}
+              end={{ x: 1, y: 0.75 }}
             />
             <NumericInput min={1} value={item.count} onChange={editCount} />
             <TextInput
@@ -87,21 +109,10 @@ const ItemRow = ({ item, backgroundColor, dispatch }) => {
               size={3}
               onSubmitEditing={addItem}
             ></TextInput>
-            {/* <AppText
-              color={"red"}
-              size={3}
-              styles={{
-                backgroundColor: "darkblue",
-                position: "absolute",
-                top: 0,
-              }}
-            >
-              {item.id}
-            </AppText> */}
           </RelativeView>
         </TouchableWithoutFeedback>
       </Swipeable>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -115,16 +126,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 10,
   },
+  image: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+  },
   test: {
     textAlign: "right",
     padding: 5,
-    borderWidth: 2,
     borderRadius: 10,
-    shadowColor: "black",
-    shadowRadius: 0,
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.2,
-    borderRadius: "10",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -140,15 +152,17 @@ const styles = StyleSheet.create({
     fontFamily: "arabic",
   },
   button: {
-    // display: "none",
     fontSize: RFPercentage(3),
   },
   swipe: {
-    backgroundColor: "red",
+    backgroundColor: colors.tomato,
     width: 70,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
+    marginLeft: 10,
+    zIndex: 20,
+    elevation: 20,
   },
   shadow: {
     shadowColor: colors.darker,
@@ -156,6 +170,18 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.8,
     // flex: 1,
+  },
+  drop_shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 6,
+    // backgroundColor: colors.lighter,
+    // borderRadius: 10,
   },
   background: {
     position: "absolute",
@@ -165,5 +191,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     height: "200%",
     borderRadius: 10,
+    // transform: [{ scaleX: 5 }],
   },
 });

@@ -46,6 +46,8 @@ const styles = StyleSheet.create({
   buttons_container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10,
+    position: "absolute",
+    bottom: height * 0.12,
+    marginLeft: 15,
   },
 });
