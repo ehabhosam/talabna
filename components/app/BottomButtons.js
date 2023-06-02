@@ -2,21 +2,11 @@ import React from "react";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { FontAwesome, EvilIcons } from "@expo/vector-icons";
 import { View, Dimensions, StyleSheet, Text } from "react-native";
-import Animated, {
-  FadeInRight,
-  FadeInLeft,
-  FadeInUp,
-} from "react-native-reanimated";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 import InputField from "./InputField";
-import RelativeView from "../RelativeView";
+import SimpleButton from "./SimpleButton";
 import { Item } from "../../module/Item";
 import { colors } from "./../../utils/colors";
-import AnimateOnClick from "./AnimateOnClick";
-import SimpleButton from "./simpleButton";
-
-const { width } = Dimensions.get("window");
 
 export default function BottomButtons({
   dispatch,
@@ -26,11 +16,6 @@ export default function BottomButtons({
   userInput,
   onClearItems,
 }) {
-  const [animation, setanimation] = React.useState("bounceIn");
-  const [isClearButtonClicked, setIsClearButtonClicked] = React.useState(false);
-  function toggleAnimation() {
-    setanimation(animation === "zoomOut" ? "zoomIn" : "zoomOut");
-  }
   return (
     <>
       {isViewingInputField && (
@@ -114,35 +99,3 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
 });
-
-/**
- *         <ThemedButton
-          name="bruce"
-          type="primary"
-          borderRadius={10}
-          width={width * 0.2 - 15}
-          onPress={onClearItems}
-        >
-          <EvilIcons name="trash" size={35} color="white" />
-        </ThemedButton>
-
-        <ThemedButton
-          name="bruce"
-          type="danger"
-          borderRadius={10}
-          width={width * 0.2 - 15}
-          onPress={() => setIsViewingInputField(!isViewingInputField)}
-        >
-          <FontAwesome name="pencil-square-o" size={24} color="white" />
-        </ThemedButton>
-        <ThemedButton
-          name="bruce"
-          type="anchor"
-          borderRadius={10}
-          width={width * 0.6 - 15}
-          onPress={() => dispatch({ type: "ADD_ITEM", payload: new Item() })}
-          debouncedPressTime={1}
-        >
-          زود يا حبيب اخوك
-        </ThemedButton>
- */
