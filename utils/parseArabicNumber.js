@@ -52,10 +52,20 @@ const arabicMapper = new Map([
   ["حضاشر", 11],
   ["احدعشر", 11],
   ["أحدعشر", 11],
+  ["one", 1],
+  ["two", 2],
+  ["three", 3],
+  ["four", 4],
+  ["five", 5],
+  ["six", 6],
+  ["seven", 7],
+  ["eight", 8],
+  ["nine", 9],
+  ["ten", 10],
 ]);
 
 export function parseArabicNumber(arabicString) {
-  return arabicMapper.get(arabicString);
+  return arabicMapper.get(arabicString.toLowerCase());
 }
 
 export function cleanArabicWord(str) {
