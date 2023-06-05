@@ -15,7 +15,11 @@ import { colors } from "./../utils/colors";
 import BottomButtons from "../components/app/BottomButtons";
 import rabbitImageUrl from "../assets/rabbit.png";
 import EmptyItems from "../components/app/EmptyItems";
-import Animated, { SlideInUp } from "react-native-reanimated";
+import Animated, {
+  SlideInUp,
+  ZoomOut,
+  ZoomOutRight,
+} from "react-native-reanimated";
 
 /* state structure: { items: { id, count, item_name }[] } */
 const initialState = { items: [] };
@@ -46,25 +50,27 @@ export default function MainScreen() {
     <Screen>
       <Animated.View entering={SlideInUp}>
         <AppText size={6} color={colors.darker} isBold={true} alignment="right">
-          هاتطلبو ايه يا رجالة؟
+          هتطلبو ايه يا رجالة؟
         </AppText>
       </Animated.View>
 
       {state.items.length > 0 && (
-        <FlatList
-          style={styles.list}
-          data={state.items}
-          keyboardDismissMode={"interactive"}
-          renderItem={({ item }) => (
-            <ItemRow
-              backgroundColor={colors.light}
-              item={item}
-              dispatch={dispatch}
-              key={item.id}
-            />
-          )}
-          ItemSeparatorComponent={<View style={{ height: 10 }} />}
-        />
+        <Animated.View exiting={ZoomOutRight}>
+          <FlatList
+            style={styles.list}
+            data={state.items}
+            keyboardDismissMode={"interactive"}
+            renderItem={({ item }) => (
+              <ItemRow
+                backgroundColor={colors.light}
+                item={item}
+                dispatch={dispatch}
+                key={item.id}
+              />
+            )}
+            ItemSeparatorComponent={<View style={{ height: 10 }} />}
+          />
+        </Animated.View>
       )}
 
       {state.items.length === 0 && <EmptyItems />}

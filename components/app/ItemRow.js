@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import NumericInput from "./../NumericInput";
 import { Image } from "expo-image";
 import {
@@ -6,32 +6,21 @@ import {
   TouchableWithoutFeedback,
   TextInput,
   Dimensions,
-  View,
-  Text,
   TouchableOpacity,
 } from "react-native";
-import { Swipeable } from "react-native-gesture-handler";
+import {
+  GestureHandlerRootView,
+  Swipeable,
+} from "react-native-gesture-handler";
 import { EvilIcons } from "@expo/vector-icons";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { LinearGradient } from "expo-linear-gradient";
-import SwipeableItem, {
-  useSwipeableItemParams,
-  OpenDirection,
-} from "react-native-swipeable-item";
 
-import AppText from "./../AppText";
 import imgUrl from "../../assets/unzoomed.png";
 import { Item } from "../../module/Item";
 import RelativeView from "./../RelativeView";
-import { ThemedButton } from "react-native-really-awesome-button";
 import { colors } from "../../utils/colors";
-import Animated, {
-  SlideOutDown,
-  SlideOutRight,
-  ZoomInUp,
-  ZoomOutDown,
-  ZoomOutRight,
-} from "react-native-reanimated";
+import Animated, { SlideOutRight, ZoomInLeft } from "react-native-reanimated";
 
 const { width } = Dimensions.get("window");
 
@@ -74,44 +63,46 @@ const ItemRow = ({ item, backgroundColor, dispatch }) => {
   return (
     <Animated.View
       style={styles.drop_shadow}
-      entering={ZoomInUp}
+      entering={ZoomInLeft}
       exiting={SlideOutRight}
     >
-      <Swipeable renderRightActions={deleteButton}>
-        <TouchableWithoutFeedback>
-          <RelativeView
-            width={"100%"}
-            height="10vh"
-            style={[styles.test, { backgroundColor }]}
-          >
-            <Image
-              blurRadius={0.5}
-              source={imgUrl}
-              style={styles.image}
-              contentFit="cover"
-            />
-            <LinearGradient
-              colors={[
-                "transparent",
-                "rgba(250, 233, 190, 0.65)",
-                colors.lighter,
-              ]}
-              style={styles.background}
-              start={{ x: 0, y: 0.25 }}
-              end={{ x: 1, y: 0.75 }}
-            />
-            <NumericInput min={1} value={item.count} onChange={editCount} />
-            <TextInput
-              value={item.title}
-              onChangeText={(value) => editTitle(value)}
-              ref={inputRef}
-              style={styles.input}
-              size={3}
-              onSubmitEditing={addItem}
-            ></TextInput>
-          </RelativeView>
-        </TouchableWithoutFeedback>
-      </Swipeable>
+      <GestureHandlerRootView>
+        <Swipeable renderRightActions={deleteButton}>
+          <TouchableWithoutFeedback>
+            <RelativeView
+              width={"100%"}
+              height="10vh"
+              style={[styles.test, { backgroundColor }]}
+            >
+              <Image
+                blurRadius={0.5}
+                source={imgUrl}
+                style={styles.image}
+                contentFit="cover"
+              />
+              <LinearGradient
+                colors={[
+                  "transparent",
+                  "rgba(250, 233, 190, 0.65)",
+                  colors.lighter,
+                ]}
+                style={styles.background}
+                start={{ x: 0, y: 0.25 }}
+                end={{ x: 1, y: 0.75 }}
+              />
+              <NumericInput min={1} value={item.count} onChange={editCount} />
+              <TextInput
+                value={item.title}
+                onChangeText={(value) => editTitle(value)}
+                ref={inputRef}
+                style={styles.input}
+                size={3}
+                onSubmitEditing={addItem}
+              ></TextInput>
+            </RelativeView>
+          </TouchableWithoutFeedback>
+        </Swipeable>
+      </GestureHandlerRootView>
     </Animated.View>
   );
 };
@@ -145,22 +136,23 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "70%",
-    height: "100%",
+    height: "80%",
     textAlign: "right",
     fontSize: RFPercentage(4),
     paddingHorizontal: 10,
     fontFamily: "arabic",
+    // backgroundColor: "red",
   },
   button: {
     fontSize: RFPercentage(3),
   },
   swipe: {
     backgroundColor: colors.tomato,
-    width: 70,
+    width: width / 8,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 10,
+    marginLeft: 5,
     zIndex: 20,
     elevation: 20,
   },

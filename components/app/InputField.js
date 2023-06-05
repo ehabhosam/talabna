@@ -1,53 +1,70 @@
-import { View, TextInput, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
+import Animated, { ZoomInDown, ZoomOutDown } from "react-native-reanimated";
+import { FontAwesome } from "@expo/vector-icons";
 import { RFPercentage } from "react-native-responsive-fontsize";
-import { ThemedButton } from "react-native-really-awesome-button";
+import { colors } from "./../../utils/colors";
 
 const { height, width } = Dimensions.get("window");
 
 const InputField = ({ placeholder, value, onChange, onSubmit }) => {
   return (
-    <View style={styles.buttons_container}>
-      <ThemedButton
-        name="bruce"
-        type="primary"
-        borderRadius={10}
-        width={width * 0.2 - 15}
-        onPress={onSubmit}
-      >
-        ودي
-      </ThemedButton>
+    <Animated.View
+      style={styles.buttons_container}
+      entering={ZoomInDown}
+      exiting={ZoomOutDown}
+    >
+      <TouchableOpacity onPress={onSubmit} style={styles.button}>
+        <FontAwesome
+          name="magic"
+          size={RFPercentage(3.3)}
+          color={colors.darker}
+        />
+      </TouchableOpacity>
       <TextInput
         value={value}
         onChangeText={(value) => onChange(value)}
         placeholder={placeholder}
         style={styles.input}
       />
-    </View>
+    </Animated.View>
   );
 };
 
 export default InputField;
 
 const styles = StyleSheet.create({
-  input: {
-    fontSize: RFPercentage(2),
-    textAlign: "right",
-    paddingHorizontal: 5,
-    borderWidth: 2,
-    height: height * 0.067,
-    borderRadius: 10,
-    backgroundColor: "lightgrey",
-    shadowColor: "black",
-    shadowRadius: 0,
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.2,
-    width: width * 0.8 - 15,
-  },
   buttons_container: {
     flexDirection: "row",
     justifyContent: "space-between",
     position: "absolute",
-    bottom: height * 0.12,
     marginLeft: 15,
+    bottom: height * 0.12 + (Platform.OS === "android" ? 20 : 0),
+    width: width * 0.9,
+  },
+  input: {
+    fontSize: RFPercentage(2),
+    textAlign: "right",
+    paddingHorizontal: 5,
+    height: height * 0.07,
+    width: "100%",
+    // borderWidth: 2,
+    borderRadius: 20,
+    backgroundColor: colors.white,
+  },
+  button: {
+    height: height * 0.07,
+    width: height * 0.07,
+    borderRadius: 20,
+    position: "absolute",
+    zIndex: 1,
+    top: height * 0.02,
+    left: width * 0.03,
   },
 });
