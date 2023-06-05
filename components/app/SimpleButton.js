@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { StyleSheet, TouchableOpacity } from "react-native";
+// import { TouchableOpacity } from "react-native-gesture-handler";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
 import AnimateOnClick from "./AnimateOnClick";
@@ -16,7 +16,7 @@ export default function SimpleButton({
   return (
     <AnimateOnClick isClicked={isClicked}>
       <Animated.View entering={FadeInDown}>
-        <TouchableWithoutFeedback
+        <TouchableOpacity
           style={[styles.rounded, styles.drop_shadow, { backgroundColor }]}
           onPress={onPress}
           onPressIn={() => setIsClicked(true)}
@@ -25,7 +25,7 @@ export default function SimpleButton({
           <RelativeView width={width} height={width} style={[styles.center]}>
             {children}
           </RelativeView>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </Animated.View>
     </AnimateOnClick>
   );
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   rounded: {
-    borderRadius: "50%",
+    borderRadius: 300,
   },
   center: {
     display: "flex",
