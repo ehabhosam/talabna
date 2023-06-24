@@ -24,17 +24,22 @@ export default function BottomButtons({
   onClearItems,
 }) {
   const { width } = useWindowDimensions();
+  function handleAddFromText() {
+    dispatch({ type: "ADD_FROM_TEXT", payload: { text: userInput } });
+    setIsViewingInputField(false);
+    setUserInput("");
+  }
+
+  function addNewItem() {
+    dispatch({ type: "ADD_ITEM", payload: new Item() });
+  }
+
   return (
     <>
       {isViewingInputField && (
         <InputField
           value={userInput}
           onChange={setUserInput}
-          onSubmit={() => {
-            dispatch({ type: "ADD_FROM_TEXT", payload: { text: userInput } });
-            setIsViewingInputField(false);
-            setUserInput("");
-          }}
           placeholder="اكتب اوردرك زي كدا: واحد فول و4 طعمية مثلا"
         />
       )}
@@ -54,7 +59,7 @@ export default function BottomButtons({
         </SimpleButton>
         <SimpleButton
           backgroundColor={colors.darker}
-          onPress={() => dispatch({ type: "ADD_ITEM", payload: new Item() })}
+          onPress={isViewingInputField ? handleAddFromText : addNewItem}
           width="20vw"
         >
           <Text style={styles.main_button_text}>+</Text>

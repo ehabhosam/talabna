@@ -1,33 +1,34 @@
 import {
-  View,
+  // View,
   TextInput,
   StyleSheet,
   Dimensions,
-  TouchableOpacity,
+  // TouchableOpacity,
   Platform,
 } from "react-native";
 import Animated, { ZoomInDown, ZoomOutDown } from "react-native-reanimated";
-import { FontAwesome } from "@expo/vector-icons";
+// import { FontAwesome } from "@expo/vector-icons";
 import { RFPercentage } from "react-native-responsive-fontsize";
 import { colors } from "./../../utils/colors";
 
 const { height, width } = Dimensions.get("window");
 
-const InputField = ({ placeholder, value, onChange, onSubmit }) => {
+const InputField = ({ placeholder, value, onChange }) => {
   return (
     <Animated.View
       style={styles.buttons_container}
       entering={ZoomInDown}
       exiting={ZoomOutDown}
     >
-      <TouchableOpacity onPress={onSubmit} style={styles.button}>
+      {/* <TouchableOpacity onPress={onSubmit} style={styles.button}>
         <FontAwesome
           name="magic"
           size={RFPercentage(3.3)}
           color={colors.darker}
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TextInput
+        editabler
         value={value}
         onChangeText={(value) => onChange(value)}
         placeholder={placeholder}
