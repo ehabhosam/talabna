@@ -33,10 +33,9 @@ export default function App() {
     return null;
   }
   return (
-    <BottomSheetModalProvider>
-      <View style={styles.container}>
-        {/* App background Image */}
-        {/* <Image
+    <View style={styles.container}>
+      {/* App background Image */}
+      {/* <Image
         style={styles.image}
         // source="https://cdn.leonardo.ai/users/f130997f-dd81-4e1b-b6d0-195e1390cede/generations/baa61c99-5e98-45e3-8875-07caf93c75cc/Leonardo_Diffusion_A_vibrant_abstract_wallpaper_featuring_a_mo_0.jpg"
         // source="https://jooinn.com/images/wood-29.jpg"
@@ -46,11 +45,12 @@ export default function App() {
         transition={1000}
         blurRadius={0.4}
       /> */}
-        <MainScreen />
-        <GlobalAlert />
-        <StatusBar style="auto" />
-      </View>
-    </BottomSheetModalProvider>
+      <MainScreen />
+      <StatusBar style="auto" />
+    </View>
+    // <BottomSheetModalProvider>
+    // {/* <GlobalAlert /> */}
+    // {/* </BottomSheetModalProvider> */}
   );
 }
 

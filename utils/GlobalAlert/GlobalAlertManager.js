@@ -143,8 +143,9 @@ class GlobalAlertManager {
                         option.onPress();
                     }}
                     variant={option.variant ?? "secondary"}
+                    title={option.title || "Option"}
                 >
-                    {option.title}
+                    {/* {option.title} */}
                 </Button>
             ))
             : [
@@ -156,8 +157,9 @@ class GlobalAlertManager {
                         onPressDismiss?.();
                     }}
                     variant="primary"
+                    title={dismissTitle || "Dismiss"}
                 >
-                    {dismissTitle}
+                    {/* {dismissTitle} */}
                 </Button>,
             ];
 

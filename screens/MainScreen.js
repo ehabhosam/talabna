@@ -57,17 +57,16 @@ export default function MainScreen() {
           style: "cancel",
         },
       ]);
-      // TODO: build custom Alert component to use this
       // globalAlertManager.alert({
-      //   title: "كدا هتمسح كل حاجة 😲",
+      //   title: "Thiss is Alert title",
       //   message: "",
       //   actions: [
       //     {
-      //       text: "دغدغ",
+      //       text: "clear",
       //       onPress: () => dispatch({ type: "CLEAR_ITEMS" }),
       //     },
       //     {
-      //       text: "خلاص بلاش",
+      //       text: "cancel",
       //       style: "cancel",
       //     },
       //   ],
