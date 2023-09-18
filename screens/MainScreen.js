@@ -32,6 +32,10 @@ import Animated, {
 /* state structure: { items: { id, count, item_name }[] } */
 const initialState = { items: [] };
 
+
+// import {} from "../utils/GlobalAlert/GlobalAlert"
+import { globalAlertManager } from "../utils/GlobalAlert/GlobalAlertManager";
+
 const { width, height } = Dimensions.get("window");
 
 export default function MainScreen() {
@@ -53,6 +57,21 @@ export default function MainScreen() {
           style: "cancel",
         },
       ]);
+      // TODO: build custom Alert component to use this
+      // globalAlertManager.alert({
+      //   title: "كدا هتمسح كل حاجة 😲",
+      //   message: "",
+      //   actions: [
+      //     {
+      //       text: "دغدغ",
+      //       onPress: () => dispatch({ type: "CLEAR_ITEMS" }),
+      //     },
+      //     {
+      //       text: "خلاص بلاش",
+      //       style: "cancel",
+      //     },
+      //   ],
+      // })
     }
   }
 
