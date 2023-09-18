@@ -1,5 +1,13 @@
 import React, { useReducer, useState } from "react";
-import { StyleSheet, FlatList, View, Dimensions, Alert } from "react-native";
+import {
+  StyleSheet,
+  FlatList,
+  View,
+  Dimensions,
+  Alert,
+  KeyboardAvoidingView,
+  useWindowDimensions,
+} from "react-native";
 import { Image } from "expo-image";
 import { ThemedButton } from "react-native-really-awesome-button";
 import { EvilIcons } from "@expo/vector-icons";
@@ -31,6 +39,8 @@ export default function MainScreen() {
   const [isViewingInputField, setIsViewingInputField] = useState(false);
   const [userInput, setUserInput] = useState("");
 
+  const { height: hookHeight } = useWindowDimensions();
+
   function onClearItems() {
     if (state.items.length > 0) {
       Alert.alert("كدا هتمسح كل حاجة 😲", "", [
@@ -55,22 +65,24 @@ export default function MainScreen() {
       </Animated.View>
 
       {state.items.length > 0 && (
-        <Animated.View exiting={ZoomOutRight}>
-          <FlatList
-            style={styles.list}
-            data={state.items}
-            keyboardDismissMode={"interactive"}
-            renderItem={({ item }) => (
-              <ItemRow
-                backgroundColor={colors.light}
-                item={item}
-                dispatch={dispatch}
-                key={item.id}
-              />
-            )}
-            ItemSeparatorComponent={<View style={{ height: 10 }} />}
-          />
-        </Animated.View>
+        <KeyboardAvoidingView>
+          <Animated.View exiting={ZoomOutRight}>
+            <FlatList
+              style={[styles.list, { maxHeight: hookHeight * 0.7 }]}
+              data={state.items}
+              keyboardDismissMode={"interactive"}
+              renderItem={({ item }) => (
+                <ItemRow
+                  backgroundColor={colors.light}
+                  item={item}
+                  dispatch={dispatch}
+                  key={item.id}
+                />
+              )}
+              ItemSeparatorComponent={<View style={{ height: 10 }} />}
+            />
+          </Animated.View>
+        </KeyboardAvoidingView>
       )}
 
       {state.items.length === 0 && <EmptyItems />}

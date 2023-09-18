@@ -64,12 +64,14 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingBottom: 20,
     margin: 20,
+    borderWidth: 1,
+    borderColor: colors.white,
   },
   drop_shadow: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 0,
     },
     shadowOpacity: 0.15,
     shadowRadius: 6,

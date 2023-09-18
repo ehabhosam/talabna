@@ -24,10 +24,10 @@ const NumericInput = ({ min, max, value, onChange, unit = "", ...rest }) => {
         buttonStyle={styles.counter_button}
         step={1}
         color={colors.lighter}
-        textColor={colors.lighter}
+        textColor={colors.white}
         max={max}
         min={min}
-        fontSize={RFPercentage(2.5)}
+        fontSize={RFPercentage(3)}
         value={value}
         onChange={onChange}
         rest

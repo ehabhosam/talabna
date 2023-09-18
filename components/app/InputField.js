@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     position: "absolute",
-    marginLeft: 15,
+    marginLeft: width * 0.05,
     bottom: height * 0.12 + (Platform.OS === "android" ? 20 : 0),
     width: width * 0.9,
   },

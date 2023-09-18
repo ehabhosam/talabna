@@ -7,8 +7,9 @@ import {
   StyleSheet,
   Text,
   Platform,
-  TouchableOpacity,
 } from "react-native";
+
+import { BlurView } from "expo-blur";
 
 import InputField from "./InputField";
 import SimpleButton from "./SimpleButton";
@@ -47,7 +48,7 @@ export default function BottomButtons({
         style={[
           styles.buttons_container,
           { width },
-          Platform.OS === "android" ? { marginBottom: 20 } : {},
+          // Platform.OS === "android" ? { marginBottom: 20 } : {},
         ]}
       >
         <SimpleButton
@@ -86,8 +87,13 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "flex-end",
+    paddingVertical: 10,
     bottom: 0,
     position: "absolute",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    backgroundColor: colors.lighter,
+    // borderRadius: "50%",
   },
   main_button: {
     backgroundColor: colors.darker,
