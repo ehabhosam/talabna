@@ -14,6 +14,13 @@ import { colors } from "./../../utils/colors";
 const { height, width } = Dimensions.get("window");
 
 const InputField = ({ placeholder, value, onChange }) => {
+
+  function handleTextChange(text) {
+    // minor fix to the bug of the text input
+    if (text.length - value.length > 10) return;
+    onChange(text);
+  }
+
   return (
     <Animated.View
       style={styles.buttons_container}
@@ -30,7 +37,7 @@ const InputField = ({ placeholder, value, onChange }) => {
       <TextInput
         editabler
         value={value}
-        onChangeText={(value) => onChange(value)}
+        onChangeText={handleTextChange}
         placeholder={placeholder}
         style={styles.input}
       />
