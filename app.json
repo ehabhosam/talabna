@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "talabna",
-    "slug": "talabna",
+    "name": "Rabee3",
+    "slug": "Rabee3",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +15,24 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ehabhosam.rabee3",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ehabhosam.rabee3"
     },
     "web": {
       "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0dd48252-ad7a-4860-9a50-7c7ca729cd18"
+      }
     }
   }
 }
