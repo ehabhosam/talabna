@@ -17,7 +17,7 @@ const InputField = ({ placeholder, value, onChange }) => {
 
   function handleTextChange(text) {
     // minor fix to the bug of the text input
-    if (text.length - value.length > 10) return;
+    if ((text.length - value.length > 6) && Platform.OS === "ios") return;
     onChange(text);
   }
 
